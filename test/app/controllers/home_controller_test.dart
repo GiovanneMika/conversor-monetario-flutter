@@ -11,8 +11,23 @@ void main() {
   );
 
   test('should be able to convert from real to dolar', () {
+    fromTextController.text = '2.0';
+    homeController.convert();
+    expect(toTextController.text, '0.38');
+  });
+
+  test('should be able to convert from real to dolar with comma', () {
     fromTextController.text = '2,0';
     homeController.convert();
     expect(toTextController.text, '0.38');
   });
+
+    test('should be able to convert from dolar to real', () {
+    fromTextController.text = '2,0';
+    homeController.fromCurrency = homeController.currencies[1]; // Dólar
+    homeController.toCurrency = homeController.currencies[0]; // Real
+    homeController.convert();
+    expect(toTextController.text, '10.76');
+  });
+
 }
