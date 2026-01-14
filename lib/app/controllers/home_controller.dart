@@ -5,16 +5,39 @@ class HomeController {
   late List<CurrencyModel> currencies;
   late CurrencyModel toCurrency;
   late CurrencyModel fromCurrency;
-  late TextEditingController toTextController = TextEditingController();
-  late TextEditingController fromTextController = TextEditingController();
+  final TextEditingController toTextController;
+  final TextEditingController fromTextController;
 
-  HomeController() {
+  HomeController({
+    required this.toTextController,
+    required this.fromTextController,
+  }) {
     currencies = CurrencyModel.getCurrencies();
-    toCurrency = currencies[0];
-    fromCurrency = currencies[1];
+    fromCurrency = currencies[0];
+    toCurrency = currencies[1];
   }
 
-  void convert(double value) {
-    // tem que implementar a conversão
+  void convert() {
+    String text = fromTextController.text;
+    double value = double.tryParse(text.replaceAll(',', '.')) ?? 1.0;
+    double returnValue;
+
+    switch (toCurrency.name) {
+      case 'Real':
+        returnValue = value * fromCurrency.real;
+        break;
+      case 'Dólar':
+        returnValue = value * fromCurrency.dolar;
+        break;
+      case 'Euro':
+        returnValue = value * fromCurrency.euro;
+        break;
+      case 'Bitcoin':
+        returnValue = value * fromCurrency.bitcoin;
+        break;
+      default:
+        returnValue = -1;
+    }
+    toTextController.text = returnValue.toStringAsFixed(2);
   }
 }
