@@ -2,16 +2,27 @@ import 'package:conversor_monetario/app/components/currency_box.dart';
 import 'package:conversor_monetario/app/controllers/home_controller.dart';
 import 'package:flutter/material.dart';
 
-class HomeView extends StatelessWidget {
-  final TextEditingController toTextController = TextEditingController();
-  final TextEditingController fromTextController = TextEditingController();
+class HomeView extends StatefulWidget {
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
   late final HomeController homeController;
-  HomeView() {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
     homeController = HomeController(
       toTextController: toTextController,
       fromTextController: fromTextController,
     );
   }
+
+  final TextEditingController toTextController = TextEditingController();
+
+  final TextEditingController fromTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +45,33 @@ class HomeView extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               CurrencyBox(
+                selectedItem: homeController.fromCurrency,
                 items: homeController.currencies,
                 controller: fromTextController,
-                onChanged: (model) {},
+                onChanged: (model) {
+                  setState(() {
+                    homeController.fromCurrency = model!;
+                  });
+                },
               ),
               const SizedBox(height: 10),
               CurrencyBox(
+                selectedItem: homeController.toCurrency,
                 items: homeController.currencies,
                 controller: toTextController,
-                onChanged: (model) {},
+                onChanged: (model) {
+                  setState(() {
+                    homeController.toCurrency = model!;
+                  });
+                },
               ),
               const SizedBox(height: 30),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  setState(() {
+                    homeController.convert();
+                  });
+                },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(
                     const Color(0xFF94BF3D),

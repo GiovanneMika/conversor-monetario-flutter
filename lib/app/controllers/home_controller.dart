@@ -38,6 +38,6 @@ class HomeController {
       default:
         returnValue = -1;
     }
-    toTextController.text = returnValue.toStringAsFixed(2);
+    toCurrency.name == 'Bitcoin' ? toTextController.text = returnValue.toStringAsFixed(8) : toTextController.text = returnValue.toStringAsFixed(2);
   }
 }
