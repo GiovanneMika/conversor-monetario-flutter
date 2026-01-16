@@ -20,7 +20,7 @@ class HomeController {
   void convert() {
     fromTextController.text.isEmpty ? fromTextController.text = '0.1' : null;
     String text = fromTextController.text;
-    double value = double.tryParse(text.replaceAll(',', '.')) ?? 10;
+    double value = double.tryParse(text.replaceAll(',', '.')) ?? 1;
     double returnValue;
 
     switch (toCurrency.name) {
