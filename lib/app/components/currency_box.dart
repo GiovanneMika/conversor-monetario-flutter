@@ -6,12 +6,14 @@ class CurrencyBox extends StatelessWidget {
   final TextEditingController controller;
   final void Function(CurrencyModel? model)? onChanged;
   final CurrencyModel selectedItem;
+  final void Function(String)? onTextChanged;
   const CurrencyBox({
     super.key,
     required this.items,
     required this.controller,
     required this.selectedItem,
     this.onChanged,
+    this.onTextChanged,
   });
 
   @override
@@ -42,6 +44,7 @@ class CurrencyBox extends StatelessWidget {
         Expanded(
           flex: 2,
           child: TextField(
+            onChanged: onTextChanged,
             controller: controller,
             decoration: InputDecoration(
               enabledBorder: UnderlineInputBorder(

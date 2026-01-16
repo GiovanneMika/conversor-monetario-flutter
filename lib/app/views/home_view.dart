@@ -51,7 +51,11 @@ class _HomeViewState extends State<HomeView> {
                 onChanged: (model) {
                   setState(() {
                     homeController.fromCurrency = model!;
+                    homeController.convert();
                   });
+                },
+                onTextChanged: (text) {
+                  homeController.convert();
                 },
               ),
               const SizedBox(height: 10),
@@ -62,7 +66,11 @@ class _HomeViewState extends State<HomeView> {
                 onChanged: (model) {
                   setState(() {
                     homeController.toCurrency = model!;
+                    homeController.convert();
                   });
+                },
+                onTextChanged: (text) {
+                  homeController.convert();
                 },
               ),
               const SizedBox(height: 30),

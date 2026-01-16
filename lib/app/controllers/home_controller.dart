@@ -19,6 +19,7 @@ class HomeController {
 
   void convert() {
     String text = fromTextController.text;
+    text == null || text.isEmpty ? fromTextController.text = '1' : null;
     double value = double.tryParse(text.replaceAll(',', '.')) ?? 1.0;
     double returnValue;
 
@@ -38,6 +39,8 @@ class HomeController {
       default:
         returnValue = -1;
     }
-    toCurrency.name == 'Bitcoin' ? toTextController.text = returnValue.toStringAsFixed(8) : toTextController.text = returnValue.toStringAsFixed(2);
+    toCurrency.name == 'Bitcoin'
+        ? toTextController.text = returnValue.toStringAsFixed(8)
+        : toTextController.text = returnValue.toStringAsFixed(2);
   }
 }
