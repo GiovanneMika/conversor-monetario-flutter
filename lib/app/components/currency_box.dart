@@ -7,6 +7,7 @@ class CurrencyBox extends StatelessWidget {
   final void Function(CurrencyModel? model)? onChanged;
   final CurrencyModel selectedItem;
   final void Function(String)? onTextChanged;
+  final bool readOnly;
   const CurrencyBox({
     super.key,
     required this.items,
@@ -14,6 +15,7 @@ class CurrencyBox extends StatelessWidget {
     required this.selectedItem,
     this.onChanged,
     this.onTextChanged,
+    this.readOnly = false,
   });
 
   @override
@@ -44,13 +46,14 @@ class CurrencyBox extends StatelessWidget {
         Expanded(
           flex: 2,
           child: TextField(
+            readOnly: readOnly,
             onChanged: onTextChanged,
             controller: controller,
             decoration: InputDecoration(
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.amber),
               ),
-              disabledBorder: UnderlineInputBorder(
+              focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.amber),
               ),
             ),

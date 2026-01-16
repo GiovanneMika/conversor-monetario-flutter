@@ -72,6 +72,7 @@ class _HomeViewState extends State<HomeView> {
                 onTextChanged: (text) {
                   homeController.convert();
                 },
+                readOnly: true,
               ),
               const SizedBox(height: 30),
               ElevatedButton(

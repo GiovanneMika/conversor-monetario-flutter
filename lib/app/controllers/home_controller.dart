@@ -18,9 +18,9 @@ class HomeController {
   }
 
   void convert() {
+    fromTextController.text.isEmpty ? fromTextController.text = '0.1' : null;
     String text = fromTextController.text;
-    text == null || text.isEmpty ? fromTextController.text = '1' : null;
-    double value = double.tryParse(text.replaceAll(',', '.')) ?? 1.0;
+    double value = double.tryParse(text.replaceAll(',', '.')) ?? 10;
     double returnValue;
 
     switch (toCurrency.name) {
